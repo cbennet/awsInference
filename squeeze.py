@@ -40,7 +40,7 @@ class ImagenetModel(object):
         sym, arg_params, aux_params = mx.model.load_checkpoint(network_prefix, 0)
 
         # Load the network into an MXNet module and bind the corresponding parameters
-        self.mod = mx.mod.Module(symbol=sym, context=context, label_names=None)
+        self.mod = mx.mod.Module(symbol=sym, context=context=mx.cpu(), label_names=None)
         self.mod.bind(for_training=False, data_shapes= input_shapes)
         self.mod.set_params(arg_params, aux_params, allow_missing=True)
         self.camera = None
